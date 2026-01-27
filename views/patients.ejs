@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Patients</title>
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <div class="container">
+      <h1>Patients</h1>
+
+      <h2>Add Patient</h2>
+      <form action="/api/patients" method="POST" class="card">
+        <input name="name" placeholder="Full Name" required />
+        <input name="dob" type="date" required />
+        <input name="age" type="number" placeholder="Age" required />
+        <input name="mrn" placeholder="MRN" required />
+        <button class="btn" type="submit">Create</button>
+      </form>
+
+      <h2>Patient List</h2>
+      <ul class="list">
+        <% patients.forEach(p => { %>
+          <li class="list-item">
+            <div>
+              <strong><%= p.name %></strong> — Age: <%= p.age %> — MRN: <%= p.mrn %>
+            </div>
+            <div class="actions">
+              <a class="btn small" href="/api/patients/view/<%= p.id %>">Details</a>
+
+              <form action="/api/patients/<%= p.id %>?_method=DELETE" method="POST">
+                <button class="btn danger small" type="submit">Delete</button>
+              </form>
+            </div>
+          </li>
+        <% }) %>
+      </ul>
+
+      <p>
+        Try filtering API:
+        <code>/api/patients?minAge=30&name=jane</code>
+      </p>
+
+      <a href="/" class="link">Back Home</a>
+    </div>
+  </body>
+</html>

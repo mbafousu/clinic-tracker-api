@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Patient Detail</title>
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <div class="container">
+      <h1>Patient Detail</h1>
+
+      <div class="card">
+        <h2><%= patient.name %></h2>
+        <p>DOB: <%= patient.dob %></p>
+        <p>Age: <%= patient.age %></p>
+        <p>MRN: <%= patient.mrn %></p>
+      </div>
+
+      <h2>Add Visit</h2>
+      <form action="/api/visits" method="POST" class="card">
+        <input type="hidden" name="patientId" value="<%= patient.id %>" />
+        <input name="date" type="date" required />
+        <input name="reason" placeholder="Reason" required />
+        <button class="btn" type="submit">Add Visit</button>
+      </form>
+
+      <h2>Add Note</h2>
+      <form action="/api/notes" method="POST" class="card">
+        <input type="hidden" name="patientId" value="<%= patient.id %>" />
+        <input name="text" placeholder="Note text..." required />
+        <button class="btn" type="submit">Add Note</button>
+      </form>
+
+      <h2>Visits</h2>
+      <ul class="list">
+        <% visits.forEach(v => { %>
+          <li class="list-item">
+            <div><strong><%= v.date %></strong> — <%= v.reason %></div>
+          </li>
+        <% }) %>
+      </ul>
+
+      <h2>Notes</h2>
+      <ul class="list">
+        <% notes.forEach(n => { %>
+          <li class="list-item">
+            <div><%= n.text %></div>
+          </li>
+        <% }) %>
+      </ul>
+
+      <a href="/api/patients/view" class="link">Back to Patients</a>
+    </div>
+  </body>
+</html>
