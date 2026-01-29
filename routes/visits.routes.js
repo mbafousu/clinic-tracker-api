@@ -5,16 +5,16 @@ const router = express.Router();
 
 // GET all visits 
 router.get("/", (req, res) => {
-  const { patientId } = req.query;
+  const { patientsId } = req.query;
   let results = [...db.visits];
-  if (patientId) results = results.filter(v => v.patientId === Number(patientId));
+  if (patientsId) results = results.filter(v => v.patientId === Number(patientsId));
   res.json(results);
 });
 
 // POST create visit
 router.post("/", (req, res) => {
-  const { patientId, date, reason } = req.body;
-  const newVisit = { id: getNextId(db.visits), patientId: Number(patientId), date, reason };
+  const { patientsId, date, reason } = req.body;
+  const newVisit = { id: getNextId(db.visits), patientsId: Number(patientsId), date, reason };
   db.visits.push(newVisit);
   res.status(201).json(newVisit);
 });
@@ -25,8 +25,8 @@ router.put("/:id", (req, res) => {
   const idx = db.visits.findIndex(v => v.id === id);
   if (idx === -1) return res.status(404).json({ error: "Visit not found" });
 
-  const { patientId, date, reason } = req.body;
-  db.visits[idx] = { id, patientId: Number(patientId), date, reason };
+  const { patientsId, date, reason } = req.body;
+  db.visits[idx] = { id, patientsId: Number(patientsId), date, reason };
   res.json(db.visits[idx]);
 });
 

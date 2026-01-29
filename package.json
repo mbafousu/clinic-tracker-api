@@ -19,5 +19,13 @@
   },
   "devDependencies": {
     "nodemon": "^3.1.11"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mbafousu/clinic-tracker-api.git"
+  },
+  "bugs": {
+    "url": "https://github.com/mbafousu/clinic-tracker-api/issues"
+  },
+  "homepage": "https://github.com/mbafousu/clinic-tracker-api#readme"
 }

@@ -91,7 +91,7 @@ router.delete("/:id", (req, res, next) => {
  //VIEW: render list + form
  //GET /api/patients/view
  
-router.get("/view", (req, res) => {
+router.get("/views", (req, res) => {
   res.render("patients", { patients: db.patients });
 });
 
@@ -99,15 +99,15 @@ router.get("/view", (req, res) => {
  // VIEW: patient detail
  // GET /api/patients/view/:id
  
-router.get("/view/:id", (req, res, next) => {
+router.get("/views/:id", (req, res, next) => {
   const id = Number(req.params.id);
-  const patient = db.patients.find(p => p.id === id);
-  if (!patient) return next(Object.assign(new Error("Patient not found"), { status: 404 }));
+  const patients = db.patients.find(p => p.id === id);
+  if (!patients) return next(Object.assign(new Error("Patients not found"), { status: 404 }));
 
-  const visits = db.visits.filter(v => v.patientId === id);
-  const notes = db.notes.filter(n => n.patientId === id);
+  const visits = db.visits.filter(v => v.patientsId === id);
+  const notes = db.notes.filter(n => n.patientsId === id);
 
-  res.render("patientDetail", { patient, visits, notes });
+  res.render("patientsDetail", { patients, visits, notes });
 });
 
 export default router;

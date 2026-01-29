@@ -5,16 +5,16 @@ const router = express.Router();
 
 // GET notes 
 router.get("/", (req, res) => {
-  const { patientId } = req.query;
+  const { patientsId } = req.query;
   let results = [...db.notes];
-  if (patientId) results = results.filter(n => n.patientId === Number(patientId));
+  if (patientsId) results = results.filter(n => n.patientsId === Number(patientsId));
   res.json(results);
 });
 
 // POST create note
 router.post("/", (req, res) => {
-  const { patientId, text } = req.body;
-  const newNote = { id: getNextId(db.notes), patientId: Number(patientId), text };
+  const { patientsId, text } = req.body;
+  const newNote = { id: getNextId(db.notes), patientsId: Number(patientsId), text };
   db.notes.push(newNote);
   res.status(201).json(newNote);
 });
