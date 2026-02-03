@@ -24,7 +24,7 @@ router.get("/patients/:id", (req, res, next) => {
   const visits = db.visits.filter(v => v.patientId === id);
   const notes = db.notes.filter(n => n.patientId === id);
 
-  // ✅ THIS is what fixes "patient is not defined"
+  
   res.render("patientsDetail", { patient, visits, notes });
 });
 

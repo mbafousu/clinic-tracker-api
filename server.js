@@ -35,12 +35,12 @@ app.use(logger);
 app.use("/api", validate);
 
 // ROUTES 
-app.use("/", viewsRouter);               // pages like / and /patients
+app.use("/", viewsRouter);               
 app.use("/api/patients", patientsRouter);
 app.use("/api/visits", visitsRouter);
 app.use("/api/notes", notesRouter);
 
-// 404 + Error middleware LAST
+// 404 + Error middleware 
 app.use(notFound);
 app.use(errorHandler);
 
